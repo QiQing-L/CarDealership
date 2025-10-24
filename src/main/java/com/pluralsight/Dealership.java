@@ -3,6 +3,12 @@ package com.pluralsight;
 import java.util.ArrayList;
 import java.util.List;
 
+/* Dealership will hold information about the dealership (name, address, ...)
+and maintain a list of vehicles. Since it has the list of vehicles, it will also
+have the methods that search the list for matching vehicles as well as
+add/remove vehicles.
+ */
+
 public class Dealership {
     private String name;
     private String address;
