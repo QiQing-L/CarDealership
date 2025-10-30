@@ -41,10 +41,10 @@ public class UserInterface {
 
     //methods:
     private void init(){
-        DealershipFileManager newManager = new DealershipFileManager();
+        DealershipFileManager newFileManager = new DealershipFileManager();
 
         try {
-            Dealership dealership = newManager.getDealership();
+            Dealership dealership = newFileManager.getDealership();
             if (dealership == null) {
                 System.out.println("Failed to load dealership.");
             }else {
@@ -84,15 +84,15 @@ public class UserInterface {
             scanner.nextLine();                     // clear newline
 
             switch (choice) {
-                case 1 -> processGetByPriceRequest();
-                case 2 -> processGetByMakeModelRequest();
-                case 3 -> processGetByYearRequest();
-                case 4 -> processGetByColorRequest();
-                case 5 -> processGetByMileageRequest();
-                case 6 -> processGetByVehicleTypeRequest();
+                case 1 -> processGetByPriceRequest(scanner);
+                case 2 -> processGetByMakeModelRequest(scanner);
+                case 3 -> processGetByYearRequest(scanner);
+                case 4 -> processGetByColorRequest(scanner);
+                case 5 -> processGetByMileageRequest(scanner);
+                case 6 -> processGetByVehicleTypeRequest(scanner);
                 case 7 -> processGetAllVehiclesRequest();
-                case 8 -> processAddVehicleRequest();
-                case 9 -> processRemoveVehicleRequest();
+                case 8 -> processAddVehicleRequest(scanner);
+                case 9 -> processRemoveVehicleRequest(scanner);
                 case 99 -> System.out.println("Thank you for shopping with us!");
                 default -> System.out.println("Invalid choice!");
             }
@@ -112,19 +112,23 @@ public class UserInterface {
         }
     }
 
-    public void processGetByPriceRequest(){
+    public void processGetByPriceRequest(Scanner input){
+        double minPrice = 0.0;
+        double maxPrice = 0.0;
         boolean done=false;
-        while (!done) {
-            Scanner input = new Scanner(System.in);
-            System.out.print("Enter minimum price: ");
-            double minPrice = input.nextDouble();
-            System.out.print("Enter maximum price: ");
-            double maxPrice = input.nextDouble();
 
-            if (!input.hasNextInt()) {
-                System.out.println("Please enter a number.");
-                input.nextLine();                 // discard bad input
-                continue;
+        while (!done) {
+            try{
+                System.out.print("Enter minimum price: ");
+                minPrice = input.nextDouble();
+                System.out.print("Enter maximum price: ");
+                maxPrice = input.nextDouble();
+
+                done = true;
+
+            } catch (Exception e){
+                System.out.println(RED2 + "Invalid input. Please enter a number." + RESET);
+                input.nextLine();
             }
 
             List<Vehicle> inventory = this.dealership.getAllVehicles();
@@ -137,15 +141,13 @@ public class UserInterface {
             }
             displayVehicles(filteredInventory);
 
-            input.close();
-            done = true;
         }
     }
 
-    public void processGetByMakeModelRequest(){
+    public void processGetByMakeModelRequest(Scanner input){
         boolean done=false;
         while (!done) {
-            Scanner input = new Scanner(System.in);
+
             System.out.print("Enter Make: ");
             String make = input.nextLine().trim();
             System.out.print("Enter Model: ");
@@ -161,23 +163,24 @@ public class UserInterface {
             }
             displayVehicles(filteredInventory);
 
-            input.close();
             done = true;
         }
 
     }
 
-    public void processGetByYearRequest(){
+    public void processGetByYearRequest(Scanner input){
+        int year = 0;
         boolean done=false;
         while (!done) {
-            Scanner input = new Scanner(System.in);
-            System.out.print("Enter year: ");
-            int year = input.nextInt();
 
-            if (!input.hasNextInt()) {
-                System.out.println("Please enter a number.");
-                input.nextLine();                 // discard bad input
-                continue;
+            try{
+                System.out.print("Enter year: ");
+                year = input.nextInt();
+
+                done = true;
+            } catch (Exception e){
+                System.out.println(RED2 + "Invalid input. Please enter a number." + RESET);
+                input.nextLine();
             }
 
             List<Vehicle> inventory = this.dealership.getAllVehicles();
@@ -190,16 +193,13 @@ public class UserInterface {
             }
             displayVehicles(filteredInventory);
 
-            input.close();
-            done = true;
         }
 
     }
 
-    public void processGetByColorRequest(){
+    public void processGetByColorRequest(Scanner input){
         boolean done=false;
         while (!done) {
-            Scanner input = new Scanner(System.in);
             System.out.print("Enter color: ");
             String color = input.nextLine().trim();
 
@@ -213,25 +213,28 @@ public class UserInterface {
             }
             displayVehicles(filteredInventory);
 
-            input.close();
             done = true;
         }
 
     }
 
-    public void processGetByMileageRequest(){
+    public void processGetByMileageRequest(Scanner input){
+        double minMileage = 0;
+        double maxMileage = 0;
         boolean done=false;
-        while (!done) {
-            Scanner input = new Scanner(System.in);
-            System.out.print("Enter minimum mileage: ");
-            double minMileage = input.nextDouble();
-            System.out.print("Enter maximum mileage: ");
-            double maxMileage = input.nextDouble();
 
-            if (!input.hasNextInt()) {
-                System.out.println("Please enter a number.");
-                input.nextLine();                 // discard bad input
-                continue;
+        while (!done) {
+
+            try{
+                System.out.print("Enter minimum mileage: ");
+                minMileage = input.nextDouble();
+                System.out.print("Enter maximum mileage: ");
+                maxMileage = input.nextDouble();
+                done = true;
+
+            } catch (Exception e){
+                System.out.println(RED2 + "Invalid input. Please enter a number." + RESET);
+                input.nextLine();
             }
 
             List<Vehicle> inventory = this.dealership.getAllVehicles();
@@ -244,16 +247,13 @@ public class UserInterface {
             }
             displayVehicles(filteredInventory);
 
-            input.close();
-            done = true;
         }
 
     }
 
-    public void processGetByVehicleTypeRequest(){
+    public void processGetByVehicleTypeRequest(Scanner input){
         boolean done=false;
         while (!done) {
-            Scanner input = new Scanner(System.in);
             System.out.print("Enter Vehicle Type: ");
             String vehicleType = input.nextLine().trim();
 
@@ -267,7 +267,6 @@ public class UserInterface {
             }
             displayVehicles(filteredInventory);
 
-            input.close();
             done = true;
         }
 
@@ -278,9 +277,7 @@ public class UserInterface {
         displayVehicles(inventory);
     }
 
-    public void processAddVehicleRequest(){
-
-        Scanner input = new Scanner(System.in);
+    public void processAddVehicleRequest(Scanner input){
 
         System.out.println("Enter the following vehicle information to add a vehicle to inventory:");
         System.out.print("Enter VIN: ");
@@ -305,12 +302,15 @@ public class UserInterface {
         Vehicle vehicle = new Vehicle(vin, year,make,model,vehicleType,color, odometer,price);
         dealership.addVehicle(vehicle);
 
-        input.close();
+        System.out.println("Successfully added: " + vehicle);
+
+        //rewrite and save dealership to file.
+        new DealershipFileManager().saveDealership(dealership);
+
 
     }
 
-    public void processRemoveVehicleRequest(){
-        Scanner input = new Scanner(System.in);
+    public void processRemoveVehicleRequest(Scanner input){
 
         System.out.println("Enter the following vehicle information to add a vehicle to inventory:");
         System.out.print("Enter VIN: ");
@@ -333,9 +333,12 @@ public class UserInterface {
         double price = input.nextDouble();
 
         Vehicle vehicle = new Vehicle(vin, year,make,model,vehicleType,color, odometer,price);
-        dealership.removeVehicle(vehicle);;
+        dealership.removeVehicle(vehicle);
 
-        input.close();
+        System.out.println("Successfully removed: " + vehicle);
+
+        //rewrite and save dealership to file.
+        new DealershipFileManager().saveDealership(dealership);
 
     }
 

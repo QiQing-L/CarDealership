@@ -1,7 +1,6 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 
 /*
 DealershipFileManager will be responsible for reading the dealership file,
@@ -10,16 +9,15 @@ file. It will also be responsible for saving a dealership and the vehicles back
 into the file in the same pipe-delimited format.
  */
 public class DealershipFileManager {
-
+    private static String fileName = "dealership.csv";
     /***
      * This method reads a file "dealership.csv" . Then load the first line as the dealership,
      * starting 2nd line till the end of file each line will be loaded as a vehicle
      * and add to dealership inventory array list.
      * @return a new Dealership or if failed throws exception
-     * @throws Exception
      */
-    public Dealership getDealership() throws Exception{
-        String fileName = "dealership.csv";
+    public Dealership getDealership() {
+
         Dealership dealership = null;
 
         try {
@@ -61,14 +59,41 @@ public class DealershipFileManager {
             reader.close();
 
         }catch (Exception exception){
-            System.err.println("Error. Failed to read file. " + exception);
+           System.err.println("Error. Failed to read file. " + exception);
 
         }
 
         return dealership;
 
     }
+
+    /**
+     *overwrite the file "fileName" with the current dealership list.
+     * @param dealership the currently using dealership in UserInterface
+     */
     public void saveDealership(Dealership dealership){
+        try{
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+            // Write the Dealership line (Name|Address|Phone) on the first line of the file.
+            String dealershipLine = String.format("%s|%s|%s",
+                    dealership.getName(),
+                    dealership.getAddress(),
+                    dealership.getPhone());
+            writer.write(dealershipLine);
+            writer.newLine();
+
+            //string from 2nd line each line will be a vehicle
+            for (Vehicle vehicle : dealership.getAllVehicles()) {
+                writer.write(vehicle.toFileString());
+                writer.newLine();
+            }
+
+            System.out.println("Dealership successfully saved to " + fileName);
+
+        } catch (Exception e) {
+            System.err.println("Error. Failed to read file name. " + e);
+        }
+
 
 
 

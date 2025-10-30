@@ -92,11 +92,22 @@ public class Vehicle {
 
     // methods
 
+    /**
+     * This prints the vehicle in format pipe-delimited for the UserInterface list display.
+     */
     @Override
     public String toString() {
-        return String.format("%-5s | %-4s | %-15s | %-10s | %-12s | %-10s | %-8d | $%.2f",
+        return String.format("%-5d | %-4d | %-15s | %-10s | %-12s | %-10s | %-8d | $%.2f",
                 vin, year, make, model, vehicleType, color, odometer,price);
 
+    }
+
+    /**
+     * Formats the Vehicle object into a pipe-delimited string for file saving in DealershipFileManager.
+     */
+    public String toFileString() {
+        return String.format("%d|%d|%s|%s|%s|%s|%d|%.2f",
+                vin, year, make, model, vehicleType, color, odometer, price);
     }
 
 
