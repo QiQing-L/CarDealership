@@ -94,8 +94,5 @@ public class DealershipFileManager {
             System.err.println("Error. Failed to read file name. " + e);
         }
 
-
-
-
     }
 }
