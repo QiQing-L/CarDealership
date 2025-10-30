@@ -68,6 +68,7 @@ public class UserInterface {
         99 - Quit
 
          */
+            // display menu
             System.out.println(YELLOW2 +  BOLD + "\nWelcome to the Car Dealership!\n" + RESET);
             System.out.println(BLUE + "1 - Find vehicles within a price range" + RESET);
             System.out.println(BLUE + "2 - Find vehicles by make / model" + RESET);
@@ -90,8 +91,15 @@ public class UserInterface {
             scanner.nextLine();                     // clear newline
 
             switch (choice) {
-                case 1 -> ;
-                case 2 -> ;
+                case 1 -> processGetByPriceRequest();
+                case 2 -> processGetByMakeModelRequest();
+                case 3 -> processGetByYearRequest();
+                case 4 -> processGetByColorRequest();
+                case 5 -> processGetByMileageRequest();
+                case 6 -> processGetByVehicleTypeRequest();
+                case 7 -> processGetAllVehiclesRequest();
+                case 8 -> processAddVehicleRequest();
+                case 9 -> processRemoveVehicleRequest();
                 case 99 -> System.out.println("Thank you for shopping with us!");
                 default -> System.out.println("Invalid choice!");
             }
