@@ -1,5 +1,6 @@
 package com.pluralsight;
 
+import java.util.List;
 import java.util.Scanner;
 
 /*
@@ -13,7 +14,7 @@ public class UserInterface {
     private Dealership dealership;
 
     /* ------------------------------------------------------------------
-           text colors
+           text colors and share data
         ------------------------------------------------------------------ */
     private static final String RESET = "\u001B[0m";
     private static final String RED = "\u001B[31m";
@@ -29,6 +30,9 @@ public class UserInterface {
     private static final String CYAN = "\u001B[36m";
     private static final String CYAN2 = "\u001B[96m";
 
+    private static final String listHeaderLine = String.format(BOLD + CYAN +
+                    "%-5s|%-4s|%-15s|%-10s|%-12s|%-10s|%-8s|%s",
+            "VIN", "Year", "Make", "Model","Vehicle Type", "Color","Mileage","Price" + RESET);
 
     //constructor
     public UserInterface() {
@@ -44,6 +48,8 @@ public class UserInterface {
             Dealership dealership = newManager.getDealership();
             if (dealership == null) {
                 System.out.println("Failed to load dealership.");
+            }else {
+                this.dealership = dealership;
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -105,10 +111,18 @@ public class UserInterface {
             }
         }
         scanner.close();
+    }
 
-
-
-
+    private void displayVehicles(List<Vehicle> inventory){
+        System.out.println(BOLD + "\nVehicles: \n" + RESET);
+        System.out.println(listHeaderLine);
+        try {
+            for (Vehicle vehicle : inventory) {
+                System.out.println(vehicle);
+            }
+        } catch (Exception e) {
+            System.out.println(RED + "Error displaying list. " + e + RESET);
+        }
     }
 
     public void processGetByPriceRequest(){
@@ -136,7 +150,8 @@ public class UserInterface {
     }
 
     public void processGetAllVehiclesRequest(){
-
+        List<Vehicle> inventory = this.dealership.getAllVehicles();
+        displayVehicles(inventory);
     }
 
     public void processAddVehicleRequest(){
