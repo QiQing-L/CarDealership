@@ -7,8 +7,11 @@ method and then creating the user interface and getting it started.
 public class Program {
     public static void main(String[] args) {
 
-    // this is for temporary testing getDealership() from DealershipFileManager class:
+        UserInterface userInterface = new UserInterface();
+        userInterface.display();
 
+    // this is for temporary testing getDealership() from DealershipFileManager class:
+/*
         DealershipFileManager newManager = new DealershipFileManager();
 
         Dealership dealership = null;
@@ -26,6 +29,8 @@ public class Program {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+ */
     //above should be removed after all testing completed.
 
 

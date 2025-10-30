@@ -31,7 +31,7 @@ public class UserInterface {
     private static final String CYAN2 = "\u001B[96m";
 
     private static final String listHeaderLine = String.format(BOLD + CYAN +
-                    "%-5s|%-4s|%-15s|%-10s|%-12s|%-10s|%-8s|%s",
+                    "%-5s | %-4s | %-15s | %-10s | %-12s | %-10s | %-8s | %s",
             "VIN", "Year", "Make", "Model","Vehicle Type", "Color","Mileage","Price" + RESET);
 
     //constructor
@@ -56,6 +56,7 @@ public class UserInterface {
         }
     }
     public void display() {
+        init();
 
         Scanner scanner = new Scanner(System.in);
         int choice = -1;
