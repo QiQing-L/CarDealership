@@ -55,29 +55,33 @@ public class Dealership {
     }
 
     public List<Vehicle> getVehiclesByMakeModel(String make, String model){
-
+        return null;
     }
     public List<Vehicle> getVehiclesByYear(int min, int max){
-
+        return null;
     }
 
     public List<Vehicle> getVehiclesByColor(String color){
-
+        return null;
     }
     public List<Vehicle> getVehiclesByMileage(int min, int max){
+        return null;
 
     }
 
     public List<Vehicle> getVehiclesByType(String vehicleType){
-
+        return null;
     }
 
     public List<Vehicle> getAllVehicles(){
-
+      /*  for(Vehicle vehicle: inventory){
+            System.out.println(vehicle);
+        } */
+        return inventory;
     }
 
     public void addVehicle(Vehicle vehicle){
-
+        inventory.add(vehicle);
     }
 
     public void removeVehicle(Vehicle vehicle){
