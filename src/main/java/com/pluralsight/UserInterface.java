@@ -295,9 +295,63 @@ public class UserInterface {
 
     public void processAddVehicleRequest(){
 
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Enter the following vehicle information to add a vehicle to inventory:");
+        System.out.print("Enter VIN: ");
+        int vin = input.nextInt();
+        input.nextLine();
+        System.out.print("Enter Year: ");
+        int year = input.nextInt();
+        input.nextLine();
+        System.out.print("Enter Make: ");
+        String make = input.nextLine();
+        System.out.print("Enter model: ");
+        String model = input.nextLine();
+        System.out.print("Enter Vehicle Type: ");
+        String vehicleType = input.nextLine();
+        System.out.print("Enter Color: ");
+        String color = input.nextLine();
+        System.out.print("Enter Odometer: ");
+        int odometer = input.nextInt();
+        System.out.print("Enter product price: ");
+        double price = input.nextDouble();
+
+        Vehicle vehicle = new Vehicle(vin, year,make,model,vehicleType,color, odometer,price);
+        dealership.addVehicle(vehicle);
+
+        input.close();
+
     }
 
     public void processRemoveVehicleRequest(){
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Enter the following vehicle information to add a vehicle to inventory:");
+        System.out.print("Enter VIN: ");
+        int vin = input.nextInt();
+        input.nextLine();
+        System.out.print("Enter Year: ");
+        int year = input.nextInt();
+        input.nextLine();
+        System.out.print("Enter Make: ");
+        String make = input.nextLine();
+        System.out.print("Enter model: ");
+        String model = input.nextLine();
+        System.out.print("Enter Vehicle Type: ");
+        String vehicleType = input.nextLine();
+        System.out.print("Enter Color: ");
+        String color = input.nextLine();
+        System.out.print("Enter Odometer: ");
+        int odometer = input.nextInt();
+        System.out.print("Enter product price: ");
+        double price = input.nextDouble();
+
+        Vehicle vehicle = new Vehicle(vin, year,make,model,vehicleType,color, odometer,price);
+        dealership.removeVehicle(vehicle);;
+
+        input.close();
+
 
     }
 
