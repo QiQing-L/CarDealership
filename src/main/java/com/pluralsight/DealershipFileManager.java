@@ -61,7 +61,7 @@ public class DealershipFileManager {
             reader.close();
 
         }catch (Exception exception){
-            System.err.println("Error. Failed to read file. ");
+            System.err.println("Error. Failed to read file. " + exception);
 
         }
 
