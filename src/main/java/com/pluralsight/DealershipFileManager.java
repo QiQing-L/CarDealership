@@ -88,6 +88,8 @@ public class DealershipFileManager {
                 writer.newLine();
             }
 
+            writer.close();
+
             System.out.println("Dealership successfully saved to " + fileName);
 
         } catch (Exception e) {
