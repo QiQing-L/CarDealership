@@ -74,9 +74,6 @@ public class Dealership {
     }
 
     public List<Vehicle> getAllVehicles(){
-      /*  for(Vehicle vehicle: inventory){
-            System.out.println(vehicle);
-        } */
         return inventory;
     }
 
@@ -85,6 +82,7 @@ public class Dealership {
     }
 
     public void removeVehicle(Vehicle vehicle){
+        inventory.remove(vehicle);
 
     }
 

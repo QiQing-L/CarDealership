@@ -1,5 +1,6 @@
 package com.pluralsight;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -127,26 +128,163 @@ public class UserInterface {
     }
 
     public void processGetByPriceRequest(){
+        boolean done=false;
+        while (!done) {
+            Scanner input = new Scanner(System.in);
+            System.out.print("Enter minimum price: ");
+            double minPrice = input.nextDouble();
+            System.out.print("Enter maximum price: ");
+            double maxPrice = input.nextDouble();
 
+            if (!input.hasNextInt()) {
+                System.out.println("Please enter a number.");
+                input.nextLine();                 // discard bad input
+                continue;
+            }
+
+            List<Vehicle> inventory = this.dealership.getAllVehicles();
+            List<Vehicle> filteredInventory = new ArrayList<>();
+
+            for (Vehicle vehicle : inventory) {
+                if (vehicle.getPrice() >= minPrice && vehicle.getPrice() <= maxPrice) {
+                    filteredInventory.add(vehicle);
+                }
+            }
+            displayVehicles(filteredInventory);
+
+            input.close();
+            done = true;
+        }
     }
 
     public void processGetByMakeModelRequest(){
+        boolean done=false;
+        while (!done) {
+            Scanner input = new Scanner(System.in);
+            System.out.print("Enter Make: ");
+            String make = input.nextLine().trim();
+            System.out.print("Enter Model: ");
+            String model = input.nextLine().trim();
+
+            List<Vehicle> inventory = this.dealership.getAllVehicles();
+            List<Vehicle> filteredInventory = new ArrayList<>();
+
+            for (Vehicle vehicle : inventory) {
+                if (make.equalsIgnoreCase(vehicle.getMake()) && model.equalsIgnoreCase(vehicle.getModel())) {
+                    filteredInventory.add(vehicle);
+                }
+            }
+            displayVehicles(filteredInventory);
+
+            input.close();
+            done = true;
+        }
 
     }
 
     public void processGetByYearRequest(){
+        boolean done=false;
+        while (!done) {
+            Scanner input = new Scanner(System.in);
+            System.out.print("Enter year: ");
+            int year = input.nextInt();
+
+            if (!input.hasNextInt()) {
+                System.out.println("Please enter a number.");
+                input.nextLine();                 // discard bad input
+                continue;
+            }
+
+            List<Vehicle> inventory = this.dealership.getAllVehicles();
+            List<Vehicle> filteredInventory = new ArrayList<>();
+
+            for (Vehicle vehicle : inventory) {
+                if (year == vehicle.getYear()) {
+                    filteredInventory.add(vehicle);
+                }
+            }
+            displayVehicles(filteredInventory);
+
+            input.close();
+            done = true;
+        }
 
     }
 
     public void processGetByColorRequest(){
+        boolean done=false;
+        while (!done) {
+            Scanner input = new Scanner(System.in);
+            System.out.print("Enter color: ");
+            String color = input.nextLine().trim();
+
+            List<Vehicle> inventory = this.dealership.getAllVehicles();
+            List<Vehicle> filteredInventory = new ArrayList<>();
+
+            for (Vehicle vehicle : inventory) {
+                if (color.equalsIgnoreCase(vehicle.getColor())) {
+                    filteredInventory.add(vehicle);
+                }
+            }
+            displayVehicles(filteredInventory);
+
+            input.close();
+            done = true;
+        }
 
     }
 
     public void processGetByMileageRequest(){
+        boolean done=false;
+        while (!done) {
+            Scanner input = new Scanner(System.in);
+            System.out.print("Enter minimum mileage: ");
+            double minMileage = input.nextDouble();
+            System.out.print("Enter maximum mileage: ");
+            double maxMileage = input.nextDouble();
+
+            if (!input.hasNextInt()) {
+                System.out.println("Please enter a number.");
+                input.nextLine();                 // discard bad input
+                continue;
+            }
+
+            List<Vehicle> inventory = this.dealership.getAllVehicles();
+            List<Vehicle> filteredInventory = new ArrayList<>();
+
+            for (Vehicle vehicle : inventory) {
+                if (vehicle.getOdometer() >= minMileage && vehicle.getOdometer() <= maxMileage) {
+                    filteredInventory.add(vehicle);
+                }
+            }
+            displayVehicles(filteredInventory);
+
+            input.close();
+            done = true;
+        }
 
     }
 
     public void processGetByVehicleTypeRequest(){
+        boolean done=false;
+        while (!done) {
+            Scanner input = new Scanner(System.in);
+            System.out.print("Enter Vehicle Type: ");
+            String vehicleType = input.nextLine().trim();
+
+            List<Vehicle> inventory = this.dealership.getAllVehicles();
+            List<Vehicle> filteredInventory = new ArrayList<>();
+
+            for (Vehicle vehicle : inventory) {
+                if (vehicleType.equalsIgnoreCase(vehicle.getVehicleType())) {
+                    filteredInventory.add(vehicle);
+                }
+            }
+            displayVehicles(filteredInventory);
+
+            input.close();
+            done = true;
+        }
 
     }
 
